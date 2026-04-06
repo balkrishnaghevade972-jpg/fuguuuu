@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Love Website</title>
+<style>
+body { margin:0; font-family: Arial; background:black; color:white; text-align:center; }
+.page { display:none; height:100vh; justify-content:center; align-items:center; flex-direction:column; }
+.active { display:flex; }
+img { width:200px; border-radius:20px; }
+button { padding:10px 20px; margin-top:20px; border:none; border-radius:10px; cursor:pointer; }
+</style>
+</head>
+<body>
+
+<!-- Page 1 -->
+<div id="page1" class="page active">
+  <h2>Upload matching hand image 🤝</h2>
+  <input type="file" id="imageInput">
+</div>
+
+<!-- Page 2 -->
+<div id="page2" class="page">
+  <h2>Hello ❤️</h2>
+  <img src="your-image.jpg" id="animatedImg">
+  <audio controls>
+    <source src="song.mp3" type="audio/mp3">
+  </audio>
+  <p>Your song lyrics here 🎶</p>
+  <button onclick="nextPage(3)">Next</button>
+</div>
+
+<!-- Page 3 -->
+<div id="page3" class="page">
+  <h2>Sorry Fuguu 🥺✨</h2>
+  <button onclick="nextPage(4)">Next</button>
+</div>
+
+<!-- Page 4 -->
+<div id="page4" class="page">
+  <h2>You mean a lot 💖🌸</h2>
+  <button onclick="nextPage(5)">Next</button>
+</div>
+
+<!-- Page 5 -->
+<div id="page5" class="page">
+  <img src="her.jpg">
+  <h2>Will you forgive me? 💌</h2>
+  <input type="text" id="answerBox" placeholder="Type your answer">
+  <button onclick="sendAnswer()">Send</button>
+</div>
+
+<script>
+const correctImageName = "hand.png";
+
+document.getElementById("imageInput").addEventListener("change", function(e) {
+  const file = e.target.files[0];
+  if (file && file.name === correctImageName) {
+    nextPage(2);
+  } else {
+    alert("Wrong image! Try again 😅");
+  }
+});
+
+function nextPage(pageNumber) {
+  document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
+  document.getElementById("page" + pageNumber).classList.add("active");
+}
+
+function sendAnswer() {
+  const answer = document.getElementById("answerBox").value;
+  alert("Answer received: " + answer);
+
+  // OPTIONAL: send to email using Formspree or backend
+}
+
+// Simple animation
+setInterval(() => {
+  const img = document.getElementById("animatedImg");
+  if (img) {
+    img.style.transform = "scale(1.2)";
+    setTimeout(() => img.style.transform = "scale(1)", 500);
+  }
+}, 1000);
+</script>
+
+</body>
+</html>
